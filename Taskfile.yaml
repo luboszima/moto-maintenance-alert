@@ -1,0 +1,26 @@
+version: '3'
+
+tasks:
+  init:
+    desc: Initial setup for whole project
+    dir: '{{.USER_WORKING_DIR}}'
+    cmds:
+      - task: dependencies
+      - task: build
+
+  dependencies:
+    desc: Install dependencies for your OS
+    dir: '{{.USER_WORKING_DIR}}'
+    preconditions:
+      - command -v bash
+    cmds:
+      - echo "Installing dependencies for this project"
+      - bash scripts/dependencies.sh
+
+  build:
+    desc: Creates an optimized production build of your application
+    dir: '{{.USER_WORKING_DIR}}'
+    preconditions:
+      - command -v platformio
+    cmds:
+      - echo "Building project"
