@@ -24,3 +24,13 @@ tasks:
       - command -v platformio
     cmds:
       - echo "Building project"
+      - platformio run
+
+  upload:
+    desc: Upload compiled code into the device
+    dir: '{{.USER_WORKING_DIR}}'
+    preconditions:
+      - command -v platformio
+    cmds:
+      - echo "Uploading project"
+      - platformio run --target upload
