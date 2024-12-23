@@ -43,3 +43,15 @@ tasks:
     cmds:
       - echo "Debug mode"
       - platformio device monitor
+
+  update_port:
+    desc: Update the port for the device
+    dir: '{{.USER_WORKING_DIR}}'
+    preconditions:
+      - command -v sed
+      - command -v ls
+    cmds:
+      - |
+        usb_port=$(find /dev  -name '*usb*' 2> /dev/null | tail -n 1)
+        sed -i '' "s|upload_port = .*|upload_port = $usb_port|g" platformio.ini
+        echo "Port updated to $usb_port"
