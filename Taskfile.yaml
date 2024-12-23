@@ -34,3 +34,12 @@ tasks:
     cmds:
       - echo "Uploading project"
       - platformio run --target upload
+
+  debug:
+    desc: Debug mode for printing out logs
+    dir: '{{.USER_WORKING_DIR}}'
+    preconditions:
+      - command -v platformio
+    cmds:
+      - echo "Debug mode"
+      - platformio device monitor
